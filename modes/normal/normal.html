@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe - Normal Mode</title>
+    <link rel="stylesheet" href="../../css/normal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="../../js/normal.js" defer></script>
+</head>
+<body>
+    <canvas id="animated-bg"></canvas>
+    <main class="background">
+        <button id="back-to-menu" class="back-button">Back to Menu</button>
+        <div class="game-wrapper">
+            <section class="scoreboard-wrapper">
+                <div class="score-box">
+                    <div class="score-label">Player X</div>
+                    <span id="score-x">0</span>
+                </div>
+            </section>
+            <div class="game-content">
+                <section class="title">
+                    <h1>Normal Mode</h1>
+                </section>
+                <section class="display">
+                    Player <span class="display-player playerX">X</span>'s turn
+                </section>
+                <section class="container">
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                </section>
+                <section class="display announcer hide"></section>
+                <section class="controls">
+                    <button id="reset">Reset</button>
+                </section>
+            </div>
+            <section class="scoreboard-wrapper">
+                <div class="score-box">
+                    <div class="score-label">Player O</div>
+                    <span id="score-o">0</span>
+                </div>
+            </section>
+        </div>
+    </main>
+    <div class="overlay" id="overlay"></div>
+    <div id="win-modal" class="modal hide">
+        <div class="modal-content">
+            <h2 id="win-message"></h2>
+            <div class="modal-buttons">
+                <button id="play-again">Play Again</button>
+                <button id="quit-game">Quit Game</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/ultimate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="../../js/ultimate.js" defer></script>
+    <title>Tic-Tac-Toe - Ultimate Mode</title>
+</head>
+<body>
+    <main class="background">
+        <div class="game-wrapper">
+            <section class="player-box player-x-box">
+                <h2>Player X</h2>
+                <div class="score-box">
+                    <span id="score-x">0</span>
+                </div>
+            </section>
+            <div class="game-content">
+                <section class="title">
+                    <h1>Ultimate Mode</h1>
+                </section>
+                <section class="display">
+                    Player <span class="display-player playerX">X</span>'s turn
+                </section>
+                <section class="container">
+                    <div class="board" id="board-0">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-1">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-2">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-3">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-4">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-5">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-6">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-7">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                    <div class="board" id="board-8">
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                        <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                    </div>
+                </section>
+                <section class="display announcer hide"></section>
+                <section class="controls">
+                    <button id="reset">Reset</button>
+                </section>
+            </div>
+            <section class="player-box player-o-box">
+                <h2>Player O</h2>
+                <div class="score-box">
+                    <span id="score-o">0</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div id="win-modal" class="modal hide">
+        <div class="modal-content">
+            <h2 id="win-message"></h2>
+            <div class="modal-buttons">
+                <button id="play-again">Play Again</button>
+                <button id="back-menu">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

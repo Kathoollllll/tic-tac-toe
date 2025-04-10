@@ -1,0 +1,167 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const tiles = Array.from(document.querySelectorAll('.tile'));
+    const displayPlayer = document.querySelector('.display-player');
+    const announcer = document.querySelector('.announcer');
+    const resetButton = document.getElementById('reset');
+    const playAgainButton = document.getElementById('play-again');
+    const quitGameButton = document.getElementById('quit-game');
+    const backToMenuButton = document.getElementById('back-to-menu');
+    const winModal = document.getElementById('win-modal');
+    const winMessage = document.getElementById("win-message");
+    const overlay = document.getElementById('overlay');
+
+    const scoreX = document.getElementById('score-x');
+    const scoreO = document.getElementById('score-o');
+
+    let board = Array(9).fill("");
+    let currentPlayer = "X";
+    let isGameActive = true; 
+    let winsX = 0;
+    let winsO = 0;
+
+    function showFinalWinner(winner) {
+        winMessage.textContent = `🏆 ${winner} wins the match!`;
+        winModal.classList.add("show");
+        overlay.classList.add("show");
+    }
+
+    const PLAYERX_WON = 'PLAYERX_WON';
+    const PLAYERO_WON = 'PLAYERO_WON';
+    const TIE = 'TIE';
+
+    const winningConditions = [
+        // Horizontal
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        // Vertical
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        // Diagonal
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    const clickSound = new Audio('../../sounds/click.wav');
+    const winSound = new Audio('../../sounds/win.mp3');
+    const tieSound = new Audio('../../sounds/tie.wav');
+
+    function handleResultValidation() {
+        let roundWon = false;
+        for (let i = 0; i < winningConditions.length; i++) {
+            const [a, b, c] = winningConditions[i];
+            if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+                roundWon = true;
+                break;
+            }
+        }
+
+        if (roundWon) {
+            announce(currentPlayer === "X" ? PLAYERX_WON : PLAYERO_WON);
+            isGameActive = false;
+            return;
+        }
+
+        if (!board.includes("")) {
+            announce(TIE);
+        }
+    }
+
+    const announce = (type) => {
+        switch (type) {
+            case PLAYERO_WON:
+                announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
+                scoreO.innerText = parseInt(scoreO.innerText) + 1;
+                winsO++;
+                winSound.play();
+                break;
+            case PLAYERX_WON:
+                announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
+                scoreX.innerText = parseInt(scoreX.innerText) + 1;
+                winsX++;
+                winSound.play();
+                break;
+            case TIE:
+                announcer.innerText = 'Tie!';
+                tieSound.play();
+                break;
+        }
+    
+        announcer.classList.remove('hide');
+        showModal(announcer.innerHTML);
+    
+        if (winsX === 3 || winsO === 3) {
+            const winner = winsX === 3 ? 'Player X' : 'Player O';
+            showFinalWinner(winner);
+        }
+    };    
+
+    const showModal = (message) => {
+        document.getElementById('win-message').innerHTML = message;
+        winModal.classList.add('show');
+        overlay.classList.add('show');
+    };
+
+    const hideModal = () => {
+        winModal.classList.remove('show');
+        overlay.classList.remove('show');
+    };
+
+    const isValidAction = (tile) => tile.innerText === "";
+
+    const updateBoard = (index) => board[index] = currentPlayer;
+
+    const changePlayer = () => {
+        displayPlayer.classList.remove(`player${currentPlayer}`);
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        displayPlayer.innerText = currentPlayer;
+        displayPlayer.classList.add(`player${currentPlayer}`);
+    };
+
+    const userAction = (tile, index) => {
+        if (isValidAction(tile) && isGameActive) {
+            tile.innerText = currentPlayer;
+            tile.classList.add(`player${currentPlayer}`);
+            clickSound.play();
+            updateBoard(index);
+            handleResultValidation();
+            if (isGameActive) changePlayer();
+        }
+    };
+
+    const resetBoard = () => {
+        board = Array(9).fill("");
+        isGameActive = true;
+        announcer.classList.add('hide');
+
+        tiles.forEach(tile => {
+            tile.innerText = '';
+            tile.classList.remove('playerX', 'playerO');
+        });
+
+        if (currentPlayer === "O") changePlayer();
+    };
+
+    tiles.forEach((tile, index) => {
+        tile.addEventListener('click', () => userAction(tile, index));
+    });
+
+    resetButton.addEventListener('click', () => {
+        hideModal();
+        resetBoard();
+    });
+
+    playAgainButton.addEventListener('click', () => {
+        hideModal();
+        resetBoard();
+    });
+
+    backToMenuButton.addEventListener('click', () => {
+        window.location.href = '../../difficulty.html';
+    });
+
+    quitGameButton.addEventListener('click', () => {
+        window.location.href = '../../index.html';
+    });
+});

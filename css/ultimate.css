@@ -1,0 +1,248 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.background {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.game-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.player-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-box {
+    background-color: #111;
+    border: 4px solid #ff00ff;
+    padding: 20px 30px;
+    text-align: center;
+    width: 130px;
+    box-shadow: 0 0 15px #ff00ff, 0 0 5px #ff00ff inset;
+}
+
+.score-box span {
+    font-size: 20px;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.title h1 {
+    color: #FFFF00;
+    text-shadow: 0 0 5px #FFFF00, 0 0 10px #FFFF00;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.display {
+    margin-bottom: 15px;
+    font-size: 16px;
+    margin: 1em 0;
+    text-shadow: 0 0 5px #fff;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    gap: 10px;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 135px;
+    height: 135px;
+    background-color: #222;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.tile {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border: 2px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+.tile:hover {
+    background-color: #444;
+    border-color: rgb(255, 99,     99);
+    box-shadow: 0 0 10px #FF3860, 0 0 20px #D03050;
+}
+
+.playerX {
+    color: #6499E9;
+    text-shadow: 2px 2px 4px rgba(100, 153, 233, 0.5);
+}
+
+.playerO {
+    color: #9400FF;
+    text-shadow: 2px 2px 4px rgba(148, 0, 255, 0.5);
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.controls button {
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    margin-left: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+#reset {
+    background-color: #FF3860;
+}
+
+#reset:hover {
+    background-color: #D03050;
+    box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #111;
+    padding: 30px;
+    border: 4px solid #ff00ff;
+    box-shadow: 0 0 10px #ff00ff, 0 0 30px #9400FF;
+    image-rendering: pixelated;
+}
+
+#win-message {
+    font-size: 18px;
+    text-shadow: 0 0 3px #fff, 0 0 5px #FFFF00, 0 0 10px #FF00FF;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    background-color: #FF3860;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    transition: background 0.3s ease-in-out;
+    flex: 1;
+}
+
+.modal-buttons button:hover {
+    background-color: #0ff;
+    color: #000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 999; 
+    display: none; 
+}
+
+.overlay.show {
+    display: block; 
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #FF3860; 
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s;
+    z-index: 1000; 
+}
+
+.back-button:hover {
+    background-color: #D03050; 
+    box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
+}
