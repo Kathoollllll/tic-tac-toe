@@ -10,7 +10,26 @@
     <title>Tic-Tac-Toe - Ultimate Mode</title>
 </head>
 <body>
+     <!-- new added codes -->
+     <div id="username-modal" class="modal show">
+        <div class="modal-content">
+            <h2>Enter Players' Usernames</h2>
+            <input type="text" id="player-x-name" placeholder="Player X Name" class="username-input"><br><br>
+            <input type="text" id="player-o-name" placeholder="Player O Name" class="username-input"><br><br>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+     <!-- new codes -->
+     <div id="welcome-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="welcome-message"></h2>
+            <button id="start-game">Start Game</button>
+        </div>
+    </div>
+
     <main class="background">
+        <button id="back-to-menu" class="back-button" type="button">Menu</button> <!-- new line -->
         <div class="game-wrapper">
             <section class="player-box player-x-box">
                 <h2>Player X</h2>
@@ -94,6 +113,18 @@
             <div class="modal-buttons">
                 <button id="play-again">Play Again</button>
                 <button id="back-menu">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- new codes -->
+    <div id="back-to-menu-modal" class="modal hide">
+        <div class="modal-content">
+            <h2>Menu Options</h2>
+            <div class="modal-buttons">
+                <button id="resume-game">Resume</button>
+                <button id="rename-players">Rename</button>
+                <button id="confirm-back-to-menu">Back to Menu</button>
             </div>
         </div>
     </div>

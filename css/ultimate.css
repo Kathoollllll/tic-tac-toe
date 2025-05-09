@@ -19,7 +19,21 @@ body {
     min-height: 100vh;
     padding: 40px 20px;
     text-align: center;
+    /* animation: hueShift 10s infinite linear; new line */
+    background: linear-gradient(135deg, #3a001f, #1a0011);/* new line */
 }
+
+/* @keyframes hueShiftUltimate {
+    0% {
+        background-color: hsl(345, 100%, 6%);
+    }
+    50% {
+        background-color: hsl(0, 100%, 10%);
+    }
+    100% {
+        background-color: hsl(345, 100%, 6%);
+    }
+} */
 
 .game-wrapper {
     display: flex;
@@ -245,4 +259,97 @@ body {
 .back-button:hover {
     background-color: #D03050; 
     box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
+}
+
+/* new codes */
+.username-input {
+    padding: 10px;
+    font-size: 12px;
+    margin-top: 20px; 
+    width: 80%;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+#username-modal,
+#welcome-modal {
+  font-size: 12px; 
+}
+
+#username-modal button,
+#welcome-modal button {
+  background-color: #FF3860;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #FF3860, 0 0 20px #D03050;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#username-modal button:hover,
+#welcome-modal button:hover {
+  background-color: #D03050;
+  box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
+}
+
+#username-modal h2,
+#welcome-modal h2,
+#username-modal .modal-text,
+#welcome-modal .modal-text {
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 3px #fff, 0 0 5px #FFFF00, 0 0 10px #FF00FF;
+}
+
+#welcome-modal .modal-text {
+    margin-bottom: 20px; 
+  }
+  
+#welcome-modal button {
+    margin-top: 12px; 
+  }
+
+  .vertical-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#back-to-menu-modal .modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+}
+
+#back-to-menu-modal .modal-buttons button {
+    background-color: #FF3860;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    transition: background 0.3s ease-in-out;
+    flex: 1;
+}
+
+#back-to-menu-modal .modal-buttons button:hover {
+    background-color: #0ff;
+    color: #000;
+}
+
+#back-to-menu-modal #play-again {
+    background-color: #316AC7;
+}
+
+#back-to-menu-modal #play-again:hover {
+    background-color: #2557A6;
 }

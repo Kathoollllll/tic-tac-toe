@@ -10,8 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const winMessage = document.getElementById("win-message");
     const overlay = document.getElementById('overlay');
 
+    // new codes
+    const usernameModal = document.getElementById('username-modal');
+    const welcomeModal = document.getElementById('welcome-modal');
+    const nextButton = document.getElementById('next-button');
+    const startGameButton = document.getElementById('start-game');
+    const playerXInput = document.getElementById('player-x-name');
+    const playerOInput = document.getElementById('player-o-name');
+    const welcomeMessage = document.getElementById('welcome-message');
+
+    //new codes
+    const backToMenuModal = document.getElementById('back-to-menu-modal');
+    const resumeGameButton = document.getElementById('resume-game');
+    const renamePlayersButton = document.getElementById('rename-players');
+    const confirmBackToMenuButton = document.getElementById('confirm-back-to-menu');
+
+    //new codes
+    const playerXLabel = document.querySelectorAll('.score-label')[0];
+    const playerOLabel = document.querySelectorAll('.score-label')[1];
+    const displaySection = document.querySelector('.display');
+
     const scoreX = document.getElementById('score-x');
     const scoreO = document.getElementById('score-o');
+
+     //new
+     let playerXName = "Player X";
+     let playerOName = "Player O"; 
 
     let board = Array(16).fill("");
     let currentPlayer = "X";
@@ -114,11 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateBoard = (index) => board[index] = currentPlayer;
 
-    const changePlayer = () => {
-        displayPlayer.classList.remove(`player${currentPlayer}`);
+     // new codes
+     const changePlayer = () => {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
-        displayPlayer.innerText = currentPlayer;
-        displayPlayer.classList.add(`player${currentPlayer}`);
+        const currentName = currentPlayer === "X" ? playerXName : playerOName;
+    
+        displaySection.innerHTML = `<span class="display-player player${currentPlayer}">${currentName}</span>'s turn`;
     };
 
     const userAction = (tile, index) => {
@@ -159,11 +184,54 @@ document.addEventListener('DOMContentLoaded', () => {
         resetBoard();
     });
 
-    backToMenuButton.addEventListener('click', () => {
-        window.location.href = '../../difficulty.html';
-    });
+    // backToMenuButton.addEventListener('click', () => {
+    //     window.location.href = '../../difficulty.html';
+    // });
 
     quitGameButton.addEventListener('click', () => {
         window.location.href = '../../index.html';
+    });
+
+    //new codes
+    nextButton.addEventListener('click', () => {
+        playerXName = playerXInput.value.trim() || "Player X";
+        playerOName = playerOInput.value.trim() || "Player O";
+
+    playerXLabel.textContent = playerXName;
+    playerOLabel.textContent = playerOName;
+
+    welcomeMessage.textContent = `Welcome ${playerXName} and ${playerOName}! Enjoy the game.`;
+
+    usernameModal.classList.remove('show');
+    welcomeModal.classList.add('show');
+    });
+    
+    startGameButton.addEventListener('click', () => {
+        welcomeModal.classList.remove('show');
+        overlay.classList.remove('show');
+
+        const current = currentPlayer === "X" ? playerXInput.value.trim() || "Player X" : playerOInput.value.trim() || "Player O";
+        const currentName = currentPlayer === "X" ? playerXName : playerOName;
+        displaySection.innerHTML = `<span class="display-player player${currentPlayer}">${currentName}</span>'s turn`;
+    });
+
+    backToMenuButton.addEventListener('click', () => {
+        backToMenuModal.classList.add('show');
+        overlay.classList.add('show');
+    });
+
+    resumeGameButton.addEventListener('click', () => {
+        backToMenuModal.classList.remove('show');
+        overlay.classList.remove('show');
+    });
+
+    renamePlayersButton.addEventListener('click', () => {
+        backToMenuModal.classList.remove('show');
+        overlay.classList.remove('show');
+        usernameModal.classList.add('show');
+    });
+
+    confirmBackToMenuButton.addEventListener('click', () => {
+        window.location.href = '../../difficulty.html';
     });
 });
