@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 4, 8], [2, 4, 6]
     ];
 
+    const clickSound = new Audio('../../sounds/click.wav');
+    const winSound = new Audio('../../sounds/win.mp3');
+    const tieSound = new Audio('../../sounds/tie.wav');
+
     const showFinalWinner = (winner) => {
         winMessage.textContent = `🏆 ${winner} wins the match!`;
         winModal.classList.add("show");
