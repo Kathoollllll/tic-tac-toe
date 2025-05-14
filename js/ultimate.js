@@ -109,13 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
             case PLAYERO_WON:
                 announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
                 scoreO.innerText = parseInt(scoreO.innerText) + 1;
+                winsO++;
+                winSound.play();
                 break;
             case PLAYERX_WON:
                 announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
                 scoreX.innerText = parseInt(scoreX.innerText) + 1;
+                winsX++;
+                winSound.play();
                 break;
             case TIE:
                 announcer.innerText = 'Tie!';
+                tieSound.play();
                 break;
         }
         announcer.classList.remove('hide');
@@ -151,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isValidAction(tile) && isGameActive) {
             tile.innerText = currentPlayer;
             tile.classList.add(`player${currentPlayer}`);
+            clickSound.play();
             updateBoardState(boardIndex, tileIndex);
             handleResultValidation(boardIndex);
             if (isGameActive) {
