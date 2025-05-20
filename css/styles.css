@@ -44,9 +44,12 @@ canvas#animated-bg {
 
 .pixel-title {
     color: #0096ff;
+    margin-bottom: 2%;
 }
 
+.settings-button,
 button {
+    font-family: 'Press Start 2P', cursive;
     font-size: 14px;
     margin: 10px;
     padding: 15px 30px;
@@ -59,84 +62,16 @@ button {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.settings-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.settings-button:hover,
 button:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
-}
-
-.tile {
-    background-color: #333;
-    border: 1px solid #555;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.tile:hover {
-    background-color: #444;
-    border-color: rgb(255, 99, 99);
-}
-
-.playerX {
-    color: #6499E9;
-    text-shadow: 2px 2px 4px rgba(100, 153, 233, 0.5);
-}
-
-.playerO {
-    color: #9400FF;
-    text-shadow: 2px 2px 4px rgba(148, 0, 255, 0.5);
-}
-
-.player-box {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 150px;
-}
-
-.score-box {
-    background-color: #222; 
-    padding: 20px 40px; 
-    border-radius: 10px;
-    font-size: 40px; 
-    font-weight: bold;
-    color: #fff;
-    min-width: 80px; 
-    text-align: center;
-    margin-top: 10px;
-}
-
-.controls {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2em;
-    gap: 1rem;
-}
-
-.controls button {
-    color: white;
-    padding: 14px;
-    border-radius: 8px;
-    border: none;
-    font-size: 20px;
-    margin-left: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-#reset {
-    background-color: #FF3860;
-}
-
-#reset:hover {
-    background-color: #D03050;
 }
 
 .overlay {
@@ -145,30 +80,33 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 999; 
-    display: none; 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
 }
 
 .overlay.show {
-    display: block; 
+    display: block;
 }
 
 .modal {
-    position: fixed;
+       position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     text-align: center;
     color: white;
     z-index: 1000;
-    width: 350px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; 
+    overflow-y: auto; 
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s;
@@ -186,38 +124,55 @@ button:hover {
     width: 100%;
 }
 
-#win-message {
-    font-size: 28px;
-}
-
-.modal-buttons {
-    margin-top: 15px;
+.setting-option {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.modal-buttons button {
-    background-color: #FF3860;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+.setting-option label {
+    margin-right: 10px;
+}
+
+.close-button {
+    position: absolute;
+    top: 0px;
+    right: 1px;
+    color: #fff;
+    font-size: 20px;
     cursor: pointer;
-    color: white;
-    font-size: 18px;
-    transition: background 0.3s ease-in-out;
-    flex: 1;
 }
 
-#play-again {
-    background-color: #316AC7;
+.setting-icon {
+    font-size: 16px;
+    margin-right: 5px;
 }
 
-#play-again:hover {
-    background-color: #2557A6;
+.back-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
 }
 
-#back-menu:hover {
-    background-color: #D03050;
+.back-button:hover {
+    color: #00ffff;
+}
+
+#instructionsContent,
+#aboutContent {
+    position: relative;
+    padding-bottom: 50px;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #ddd;
 }
 
 @keyframes flicker {

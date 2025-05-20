@@ -9,12 +9,94 @@
 </head>
 <body>
   <canvas id="animated-bg"></canvas>
+  <button class="settings-button" onclick="openSettingsModal()">⚙ Settings</button>
   <div class="container difficulty-select">
     <h1 class="pixel-title">Select Difficulty</h1>
     <button onclick="location.href='modes/normal/normal.html'">Normal</button>
     <button onclick="location.href='modes/intermediate/intermediate.html'">Intermediate</button>
     <button onclick="location.href='modes/ultimate/ultimate.html'">Ultimate</button>
   </div>
+
+  <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeSettingsModal()">&times;</span>
+            <h2 id="modalTitle">Settings</h2>
+            <div id="modalBody">
+                <div id="settingsContent">
+                    <div class="setting-option">
+                        <label for="soundEffects"><span class="setting-icon">🔊</span> Sound Effects:</label>
+                        <button id="soundEffects" onclick="toggleSoundEffects()">On</button>
+                    </div>
+
+                    <div class="setting-option">
+                        <label for="backgroundMusic"><span class="setting-icon">🎵</span> Background Music:</label>
+                        <button id="backgroundMusic" onclick="toggleBackgroundMusic()">On</button>
+                    </div>
+
+                    <div class="setting-option">
+                        <label for="howToPlay"><span class="setting-icon">❓</span> How to Play:</label>
+                        <button id="howToPlayButton" onclick="showHowToPlay()">Instructions</button>
+                    </div>
+
+                    <div class="setting-option">
+                        <label for="aboutGame"><span class="setting-icon">ℹ️</span> About the Game:</label>
+                        <button id="aboutGameButton" onclick="showAbout()">Learn More</button>
+                    </div>
+                </div>
+               <div id="instructionsContent" style="display:none;">
+                 <p style="margin-top: 10px;">Learn how to play each exciting mode of Tic Tac Toe Evolution:</p>
+
+                <p style="margin-top: 10px;">1️⃣ Classic 3×3 Mode</p>
+                <p style="margin-top: 5px;">Objective: Be the first to get 3 of your symbols (X or O) in a row (horizontally, vertically, or diagonally).</p>
+                <p style="margin-top: 5px;">Gameplay: Take turns placing your symbol in empty squares.</p>
+                <p style="margin-top: 5px;">Outcome: Win, lose, or draw (if the grid fills with no winner).</p>
+
+                <p style="margin-top: 10px;">2️⃣ Strategic 4×4 Mode</p>
+                <p style="margin-top: 5px;">Objective: Score 4 in a row to win (diagonals included).</p>
+                <p style="margin-top: 5px;">Larger Grid: More spaces mean deeper strategy—block your opponent while building your line.</p>
+
+                <p style="margin-top: 10px;">3️⃣ Mega 9×9 Mode</p>
+                <p style="margin-top: 5px;">Objective: The first to align 5 symbols in a row wins!</p>
+                <p style="margin-top: 5px;">Expanded Tactics: Think ahead—longer rows, more traps, and bigger comebacks.</p>
+
+                <p style="margin-top: 10px;">⚙️ Tips & Tricks</p>
+                <p style="margin-top: 5px;">Control the center (in 3×3 and 4×4) for more winning opportunities.</p>
+                <p style="margin-top: 5px;">Watch for forks (creating two winning paths at once).</p>
+                <p style="margin-top: 5px;">In 9×9, focus on both offense and defense—bigger board, bigger stakes!</p>
+                <span class="back-button" onclick="showSettings()">&#8592; Back</span>
+              </div>
+              <div id="aboutContent" style="display:none;">
+
+                <p style="margin-top: 10px;">A fresh and strategic evolution of the classic Tic Tac Toe!
+                  Whether you're a casual player or a tactical mastermind, dive into three thrilling modes—each 
+                  with its own unique challenge:</p>
+
+                <p style="margin-top: 10px;">1️⃣ Normal (Classic 3×3) – Simple, Fast, and Fun!</p>
+                <p style="margin-top: 5px;">How to Play: The timeless rules you know and love!</p>
+                <p style="margin-top: 5px;">Objective: Be the first to get 3 X’s or O’s in a row (horizontally, vertically, or diagonally).</p>
+                <p style="margin-top: 5px;">Perfect for: Quick matches, beginners, and nostalgic fun.</p>
+
+                <p style="margin-top: 10px;">2️⃣ Intermediate (4×4) – Bigger Grid, Bigger Strategy!</p>
+                <p style="margin-top: 5px;">How to Play: A larger 4×4 board with a twist.</p>
+                <p style="margin-top: 5px;">Objective: Score 4 in a row to win—but watch out, more spaces mean more mind games!</p>
+                <p style="margin-top: 5px;">Strategy Tip: Control the center and block your opponent’s potential winning moves early.</p>
+               
+                <p style="margin-top: 10px;">3️⃣ Ultimate (9×9) – The Ultimate Tic Tac Toe Challenge!</p>
+                <p style="margin-top: 5px;">How to Play: A massive 9×9 grid divided into nine 3×3 mini-boards—like Tic Tac Toe inside Tic Tac Toe!</p>
+                <p style="margin-top: 5px;">Objective: First, win a 3×3 mini-board by getting 3 in a row. Then, win the 
+                  entire 9×9 game by securing three mini-board wins in a row (just like classic Tic Tac Toe).</p>
+                <p style="margin-top: 5px;">Rules: Your move in a mini-board determines where your opponent plays next. 
+                  If sent to an already won mini-board, you get a free move anywhere!</p>
+                <p style="margin-top: 5px;">Why It’s Ultimate: A true test of foresight, adaptability, and long-term strategy.</p>
+
+                <span class="back-button" onclick="showSettings()">&#8592; Back</span>
+              </div>
+            </div>
+        </div>
+    </div>
+
+  <div id="overlay" class="overlay"></div>
+
   <script src="js/script.js"></script>
 </body>
 </html>

@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const winModal = document.getElementById('win-modal');
     const winMessage = document.getElementById("win-message");
     const overlay = document.getElementById('overlay');
-
-    // new codes
     const usernameModal = document.getElementById('username-modal');
     const welcomeModal = document.getElementById('welcome-modal');
     const nextButton = document.getElementById('next-button');
@@ -20,19 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerXInput = document.getElementById('player-x-name');
     const playerOInput = document.getElementById('player-o-name');
     const welcomeMessage = document.getElementById('welcome-message');
-
-    //new codes
     const backToMenuModal = document.getElementById('back-to-menu-modal');
     const resumeGameButton = document.getElementById('resume-game');
     const renamePlayersButton = document.getElementById('rename-players');
     const confirmBackToMenuButton = document.getElementById('confirm-back-to-menu');
-
-    //new codes
     const playerXLabel = document.querySelectorAll('.score-label')[0];
     const playerOLabel = document.querySelectorAll('.score-label')[1];
     const displaySection = document.querySelector('.display');
 
-    //new
     let playerXName = "Player X";
     let playerOName = "Player O"; 
 
@@ -144,8 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         boardStates[boardIndex][tileIndex] = currentPlayer;
     };
 
-     // new codes
-     const changePlayer = () => {
+    const changePlayer = () => {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
         const currentName = currentPlayer === "X" ? playerXName : playerOName;
     
@@ -211,15 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
         resetBoard();
     });
 
-    // backToMenuButton?.addEventListener('click', () => {
-    //     window.location.href = '../../difficulty.html';
-    // });
-
     quitGameButton?.addEventListener('click', () => {
         window.location.href = '../../index.html';
     });
 
-    //new codes
     nextButton.addEventListener('click', () => {
         playerXName = playerXInput.value.trim() || "Player X";
         playerOName = playerOInput.value.trim() || "Player O";

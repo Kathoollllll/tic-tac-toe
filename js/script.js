@@ -4,6 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
       startBtn.addEventListener("click", () => {
           const clickSound = new Audio("sounds/click.wav");
           clickSound.play();
+
+          localStorage.setItem('backgroundMusic', 'true');
+           if (!backgroundMusic) {
+                backgroundMusic = playBackgroundMusic();
+            } else if (backgroundMusic.paused) {
+                backgroundMusic.play()
+                    .then(() => {
+                    })
+                    .catch(error => {
+                        console.error("Autoplay was prevented for background music:", error);
+                    });
+            }
+
           setTimeout(() => {
               window.location.href = "difficulty.html";
           }, 300);
@@ -51,3 +64,112 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener("resize", resizeCanvas);
   }
 });
+
+let backgroundMusic;
+
+function playBackgroundMusic() {
+    let backgroundMusicEnabled = localStorage.getItem('backgroundMusic') !== 'false';
+    if (backgroundMusicEnabled) {
+        backgroundMusic = new Audio('sounds/background.mp3');
+        backgroundMusic.loop = true;
+        backgroundMusic.volume = 0.5;
+        backgroundMusic.play();
+        return backgroundMusic;
+    }
+    return null;
+}
+
+function stopBackgroundMusic() {
+    if (backgroundMusic) {
+        backgroundMusic.pause();
+    }
+}
+
+function playSoundEffect(sound) {
+    let soundEffectsEnabled = localStorage.getItem('soundEffects') !== 'false';
+    if (soundEffectsEnabled) {
+        let soundEffect = new Audio(`sounds/${sound}.wav`);
+        soundEffect.play();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    let soundEffectsEnabled = localStorage.getItem('soundEffects') !== 'false';
+    let backgroundMusicEnabled = localStorage.getItem('backgroundMusic') !== 'false';
+
+    document.getElementById('soundEffects').innerText = soundEffectsEnabled ? "On" : "Off";
+    document.getElementById('backgroundMusic').innerText = backgroundMusicEnabled ? "On" : "Off";
+
+    if (backgroundMusicEnabled) {
+        backgroundMusic = playBackgroundMusic();
+    }
+
+    window.toggleSoundEffects = function () {
+        let button = document.getElementById('soundEffects');
+        soundEffectsEnabled = !soundEffectsEnabled;
+        button.innerText = soundEffectsEnabled ? "On" : "Off";
+        localStorage.setItem('soundEffects', soundEffectsEnabled);
+    };
+
+    window.toggleBackgroundMusic = function () {
+        let button = document.getElementById('backgroundMusic');
+        backgroundMusicEnabled = !backgroundMusicEnabled;
+        button.innerText = backgroundMusicEnabled ? "On" : "Off";
+        localStorage.setItem('backgroundMusic', backgroundMusicEnabled);
+        if (backgroundMusicEnabled) {
+            if (!backgroundMusic) {
+                backgroundMusic = playBackgroundMusic();
+            } else {
+                backgroundMusic.play();
+            }
+        } else {
+            if (backgroundMusic) {
+                backgroundMusic.pause();
+            }
+        }
+    };
+});
+
+function showHowToPlay() {
+    document.getElementById('settingsContent').style.display = 'none';
+    document.getElementById('instructionsContent').style.display = 'block';
+    document.getElementById('aboutContent').style.display = 'none';
+    document.getElementById('modalTitle').innerText = "🎮 How to Play";
+}
+
+function showAbout() {
+    document.getElementById('settingsContent').style.display = 'none';
+    document.getElementById('instructionsContent').style.display = 'none';
+    document.getElementById('aboutContent').style.display = 'block';
+    document.getElementById('modalTitle').innerText = "🎮 About The Game";
+}
+
+function openSettingsModal() {
+    document.getElementById('settingsModal').classList.add('show');
+    document.getElementById('overlay').classList.add('show');
+    document.querySelectorAll('.difficulty-select button').forEach(button => {
+        button.setAttribute('disabled', 'true');
+    });
+    document.querySelectorAll('.settings-button').forEach(button => {
+        button.setAttribute('disabled', 'true');
+    });
+    document.querySelector('.close-button').removeAttribute('disabled');
+}
+
+function closeSettingsModal() {
+    document.getElementById('settingsModal').classList.remove('show');
+    document.getElementById('overlay').classList.remove('show');
+    document.querySelectorAll('.difficulty-select button').forEach(button => {
+        button.removeAttribute('disabled');
+    });
+    document.querySelectorAll('.settings-button').forEach(button => {
+        button.removeAttribute('disabled');
+    });
+}
+
+ function showSettings() {
+        document.getElementById('settingsContent').style.display = 'block';
+        document.getElementById('instructionsContent').style.display = 'none';
+        document.getElementById('aboutContent').style.display = 'none';
+        document.getElementById('modalTitle').innerText = 'Settings';
+    }

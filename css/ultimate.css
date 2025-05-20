@@ -2,6 +2,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive !important;
+    image-rendering: pixelated;
 }
 
 body {
@@ -9,6 +11,7 @@ body {
     background-color: #000;
     color: #fff;
     overflow-x: hidden;
+    user-select: none;
 }
 
 .background {
@@ -19,21 +22,19 @@ body {
     min-height: 100vh;
     padding: 40px 20px;
     text-align: center;
-    /* animation: hueShift 10s infinite linear; new line */
-    background: linear-gradient(135deg, #3a001f, #1a0011);/* new line */
+    position: relative;
+    background: linear-gradient(135deg, #2a0005, #800020, #ff4d4d);
+    background-size: 300% 300%;
+    animation: redFlow 10s ease infinite;
+    pointer-events: auto;
+    overflow: hidden;
 }
 
-/* @keyframes hueShiftUltimate {
-    0% {
-        background-color: hsl(345, 100%, 6%);
-    }
-    50% {
-        background-color: hsl(0, 100%, 10%);
-    }
-    100% {
-        background-color: hsl(345, 100%, 6%);
-    }
-} */
+@keyframes redFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
 .game-wrapper {
     display: flex;
@@ -51,16 +52,23 @@ body {
 .score-box {
     background-color: #111;
     border: 4px solid #ff00ff;
-    padding: 20px 30px;
+    padding: 25px 35px;
     text-align: center;
-    width: 130px;
+    width: 180px;
     box-shadow: 0 0 15px #ff00ff, 0 0 5px #ff00ff inset;
+    image-rendering: pixelated;
+}
+
+.score-label {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .score-box span {
-    font-size: 20px;
+    font-size: 24px;
+    display: block;
+    margin-top: 5px;
 }
-
 .game-content {
     display: flex;
     flex-direction: column;
@@ -144,25 +152,35 @@ body {
     margin-top: 20px;
 }
 
-.controls button {
+.controls button,
+#username-modal button,
+#welcome-modal button,
+#back-to-menu-modal .modal-buttons button {
     color: white;
-    padding: 14px;
+    padding: 14px 20px;
     border-radius: 8px;
     border: none;
-    font-size: 20px;
-    margin-left: 1em;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s;
 }
 
-#reset {
+
+#reset,
+#username-modal button,
+#welcome-modal button,
+#back-to-menu-modal .modal-buttons button {
     background-color: #FF3860;
 }
 
-#reset:hover {
+#reset:hover,
+#username-modal button:hover,
+#welcome-modal button:hover,
+#back-to-menu-modal .modal-buttons button:hover {
     background-color: #D03050;
     box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
 }
+
 
 .modal {
     position: fixed;
@@ -182,8 +200,8 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s;
+    pointer-events: auto;
 }
-
 .modal.show {
     opacity: 1;
     visibility: visible;
@@ -197,12 +215,16 @@ body {
     image-rendering: pixelated;
 }
 
-#win-message {
+#win-message,
+#username-modal h2,
+#welcome-modal h2,
+#username-modal .modal-text,
+#welcome-modal .modal-text {
     font-size: 18px;
-    text-shadow: 0 0 3px #fff, 0 0 5px #FFFF00, 0 0 10px #FF00FF;
     line-height: 1.5;
     letter-spacing: 1px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    text-shadow: 0 0 3px #fff, 0 0 5px #FFFF00, 0 0 10px #FF00FF;
 }
 
 .modal-buttons {
@@ -228,17 +250,41 @@ body {
     color: #000;
 }
 
+#play-again,
+#back-to-menu-modal #play-again {
+    background-color: #316AC7;
+}
+
+#play-again:hover,
+#back-to-menu-modal #play-again:hover {
+    background-color: #2557A6;
+}
+
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 999; 
-    display: none; 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+    backdrop-filter: blur(5px);
+    pointer-events: auto;
 }
 
+.overlay.show ~ .background,
+#back-to-menu-modal.show ~ .background,
+#username-modal.show ~ .background,
+#welcome-modal.show ~ .background,
+#win-modal.show ~ .background {
+    pointer-events: none;
+    filter: blur(5px);
+}
+
+
 .overlay.show {
-    display: block; 
+    display: block;
+    pointer-events: auto;
+    backdrop-filter: blur(5px);
 }
 
 .back-button {
@@ -261,62 +307,77 @@ body {
     box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
 }
 
-/* new codes */
+.back-button-modal {
+    position: fixed; 
+    bottom: 70px;
+    background-color: #FF3860;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s;
+    z-index: 1000;
+}
+
+.back-button-modal:hover {
+    background-color: #D03050;
+    box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
+}
+
 .username-input {
     padding: 10px;
     font-size: 12px;
-    margin-top: 20px; 
+    margin-top: 20px;
     width: 80%;
     margin: 5px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
     text-align: center;
+    font-family: 'Press Start 2P', cursive !important;
+    image-rendering: pixelated;
 }
 
 #username-modal,
 #welcome-modal {
-  font-size: 12px; 
+    font-size: 12px;
 }
 
-#username-modal button,
-#welcome-modal button {
-  background-color: #FF3860;
-  color: white;
-  padding: 14px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 0 10px #FF3860, 0 0 20px #D03050;
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+#welcome-modal {
+    font-size: 12px;
+     width: 500px;
+    height: 265px;  
 }
 
-#username-modal button:hover,
-#welcome-modal button:hover {
-  background-color: #D03050;
-  box-shadow: 0 0 20px #FF3860, 0 0 40px #D03050;
+#back-to-menu-modal{
+    font-size: 12px;
+    width: 380px;
+    height: 310px;
 }
 
-#username-modal h2,
-#welcome-modal h2,
-#username-modal .modal-text,
-#welcome-modal .modal-text {
-  font-size: 18px;
-  line-height: 1.5;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-  text-shadow: 0 0 3px #fff, 0 0 5px #FFFF00, 0 0 10px #FF00FF;
+#win-modal {
+    font-size: 12px;
+    width: 400px;
+    height: 250px;
 }
 
-#welcome-modal .modal-text {
-    margin-bottom: 20px; 
-  }
-  
-#welcome-modal button {
-    margin-top: 12px; 
-  }
+#username-modal .modal-content {
+    padding-bottom: 100px; 
+}
 
-  .vertical-buttons {
+#welcome-modal .modal-content,
+#back-to-menu-modal .modal-content{
+    padding: 16px; 
+}
+
+#username-modal {
+    font-size: 12px;
+    width: 450px;
+    height: 450px;
+}
+
+.vertical-buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -325,31 +386,17 @@ body {
 #back-to-menu-modal .modal-buttons {
     margin-top: 15px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 10px;
 }
 
-#back-to-menu-modal .modal-buttons button {
-    background-color: #FF3860;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    font-size: 18px;
-    transition: background 0.3s ease-in-out;
-    flex: 1;
+body.modal-open .background {
+    pointer-events: none;
+    filter: blur(5px);
 }
 
-#back-to-menu-modal .modal-buttons button:hover {
-    background-color: #0ff;
-    color: #000;
-}
-
-#back-to-menu-modal #play-again {
-    background-color: #316AC7;
-}
-
-#back-to-menu-modal #play-again:hover {
-    background-color: #2557A6;
+body.modal-open .overlay {
+    display: block;
+    pointer-events: auto;
+    backdrop-filter: blur(5px);
 }
